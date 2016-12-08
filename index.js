@@ -33,17 +33,21 @@ module.exports = function (pattern, opts) {
       let source = file.contents.toString();
       let out, match, ptr = 0, count = 0;
       while((match = regex.exec(source))!==null) {
-        if(!opts.includeEmptySegments && match.index-ptr == 0) {
+        let segment = source.substring(ptr, match.index);
+        if(!opts.includeEmptySegments && /^\s*$/.test(segment)) {
           ptr += match.index+match[0].length;
           continue;
         }
 
         out = file.clone({contents: false});
         out.basename = opts.rename.apply(null, [].concat.apply([out.basename, count], match)) || out.basename;
-        out.contents = Buffer.from(source.substring(ptr, match.index));
+        out.contents = Buffer.from(segment);
         this.push(out);
         ptr = regex.lastIndex;
         count++;
+      }
+      if(!opts.includeEmptySegments && /^\s*$/.test(source.substring(ptr))) {
+        return cb();
       }
       out = file.clone({contents: false});
       out.basename = opts.rename.apply(null, [].concat.apply([out.basename, count], match)) || out.basename;

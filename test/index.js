@@ -41,6 +41,23 @@ describe('gulp-split-marker', function() {
         done();
       });
     });
+    it("it should skip empty segments by default", function(done){
+      var called = false;
+      var stream = split(/---/, {});
+      stream.end(new gutil.File({
+        base: "/test",
+        path: "/test/random/input.json",
+        contents: Buffer.from("---")
+      }));
+      var contents = [];
+      stream.on("data", function(file){
+        contents.push(file.contents.toString());
+      });
+      stream.on("end", function(){
+        assert.equal(0, contents.length);
+        done();
+      });
+    });
     it("it should split on regexps", function(done){
       var called = false;
       var stream = split(/-\d+-/, {});
