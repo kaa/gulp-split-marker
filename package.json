@@ -1,0 +1,33 @@
+{
+  "name": "gulp-split-marker",
+  "version": "1.0.0",
+  "description": "Splits files at user defined markers",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaa/gulp-split-marker.git"
+  },
+  "keywords": [
+    "gulp",
+    "split",
+    "marker"
+  ],
+  "author": "Joakim Beijar [github.com/kaa]",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaa/gulp-split-marker/issues"
+  },
+  "homepage": "https://github.com/kaa/gulp-split-marker#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "mocha": "^3.0.2",
+    "vinyl-fs": "^2.4.3"
+  },
+  "dependencies": {
+    "gulp-util": "^3.0.7",
+    "through2": "^2.0.1"
+  }
+}
